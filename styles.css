@@ -474,6 +474,13 @@ input {
   margin-bottom: 0.8rem;
 }
 
+
+.input-help {
+  margin: 0.4rem 0 0.7rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
 .resultado {
   margin-top: 0.8rem;
   font-size: 0.95rem;

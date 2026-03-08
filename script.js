@@ -20,10 +20,12 @@ const inputLote = document.getElementById('lote');
 const resultado = document.getElementById('resultado');
 
 function renderResultado() {
+  if (!inputLote || !resultado) return;
+
   const valorLote = Number(inputLote.value || 0);
 
-  if (valorLote < 10000000) {
-    resultado.innerHTML = 'Ingresa un valor de lote válido.';
+  if (valorLote < 35000000) {
+    resultado.innerHTML = 'Ingresa un valor de lote igual o superior a $35.000.000.';
     return;
   }
 
@@ -31,11 +33,23 @@ function renderResultado() {
 
   resultado.innerHTML = `
     <p><strong>Separación:</strong> $${money.format(plan.separacion)}</p>
-    <p><strong>Cuota inicial (25%):</strong> $${money.format(plan.cuotaInicial)}</p>
+    <p><strong>Cuota inicial restante (25%):</strong> $${money.format(plan.cuotaInicial)}</p>
     <p><strong>35 cuotas (70%):</strong> $${money.format(Math.round(plan.mensualidad))}/mes</p>
     <p><strong>Cuota final (5%):</strong> $${money.format(plan.cuotaFinal)}</p>
   `;
 }
 
-boton.addEventListener('click', renderResultado);
+if (boton) {
+  boton.addEventListener('click', renderResultado);
+}
+
+if (inputLote) {
+  inputLote.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      renderResultado();
+    }
+  });
+}
+
 renderResultado();
